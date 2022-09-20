@@ -22,12 +22,6 @@ public class UsingTranslate extends Application {
 	public void start(Stage primaryStage) {
 		
 		final Circle circle = new Circle(0,0,30);
-//		circle.setTranslateX(1.5);
-//		circle.setTranslateY(1.5);
-		
-//		Translate translate = new Translate();
-//		
-//		circle.getTransforms().add(translate);
 		
 		Group group = new Group(circle);
 		final Scene scene = new Scene(group,400,400);
@@ -53,10 +47,7 @@ public class UsingTranslate extends Application {
 				// update center coordinates
 				circle.setTranslateX(x+=dx);
 				circle.setTranslateY(y+=dy);
-//				circle.setCenterX(x+=dx);
-//				circle.setCenterY(y+=dy);
-//				circle.translateXProperty();
-//				circle.translateYProperty();
+
 			}
 			
 		});

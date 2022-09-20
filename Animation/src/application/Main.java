@@ -1,5 +1,7 @@
 package application;
 	
+import java.util.ArrayList;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -15,15 +17,22 @@ import javafx.scene.shape.Circle;
 
 public class Main extends Application {
 	
-	float x = 100f, y = 100f, dx = 1.5f, dy=1.5f;
-	
+	float x = 50f, y = 50f;
+	final ArrayList<Ball> balls = new ArrayList<Ball>();
 	
 	@Override
 	public void start(Stage primaryStage) {
 		
-		final Circle circle = new Circle(x,y,30);
+		Group group = new Group();
 		
-		Group group = new Group(circle);
+		// create new balls, add them to the group and the ArrayList
+		for (int i = 0; i < 3; i++) {
+			Ball newBall = new Ball(x*(i+1), y*(i+1));
+			balls.add(newBall);
+			group.getChildren().add(newBall.getCircle());
+		}
+		
+		
 		final Scene scene = new Scene(group,400,400);
 		
 		
@@ -31,24 +40,11 @@ public class Main extends Application {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				
-				// keep in bounds
-				if(circle.getCenterX() < circle.getRadius() || 
-						circle.getCenterX() + circle.getRadius() > scene.getWidth()) {
-					dx = -dx;
+				// animate each of the balls in the arraylist
+				for (int i = 0; i < balls.size(); i++) {					
+					balls.get(i).animate(scene.getWidth(), scene.getHeight());
 				}
-				
-				if(circle.getCenterY() < circle.getRadius() || 
-						circle.getCenterY() + circle.getRadius() > scene.getHeight()) {
-					dy = -dy;
-				}
-				
-				
-				// update center coordinates
-				circle.setCenterX(x+=dx);
-				circle.setCenterY(y+=dy);
 			}
-			
 		});
 		
 		
